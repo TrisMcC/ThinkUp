@@ -64,8 +64,6 @@ $controller_test->add(new TestOfRSSController());
 $controller_test->add(new TestOfUpgradeController());
 $controller_test->add(new TestOfPostAPIController());
 
-
-
 $tr = new TextReporter();
 $controller_test->run( $tr );
 if (isset($RUNNING_ALL_TESTS) && $RUNNING_ALL_TESTS) {

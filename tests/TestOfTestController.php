@@ -143,6 +143,7 @@ class TestOfTestController extends ThinkUpUnitTestCase {
 
         $_GET['json'] = true;
         $results = $controller->go();
+        $this->debug($results);
         $this->assertFalse(strpos($results, '<html'));
         $this->assertPattern('/{/', $results);
         $this->assertPattern('/Testing exception handling/', $results);

@@ -11,3 +11,4 @@ Contents:
    datacapture
    views
    plugins
+   api/index

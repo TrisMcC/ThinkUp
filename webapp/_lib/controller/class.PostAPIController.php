@@ -149,22 +149,22 @@ class PostAPIController extends ThinkUpController {
     private function parseOrderBy($order_by) {
         switch ($order_by) {
             case 'date': $order_by = 'pub_date';
-                break;
+            break;
             case 'post_id': $order_by = 'p.post_id';
-                break;
+            break;
             case 'location': $order_by = 'location';
-                break;
+            break;
             case 'source': $order_by = 'source';
-                break;
+            break;
             case 'follower_count': $order_by = 'author_follower_count';
-                break;
+            break;
             case 'post_text': $order_by = 'post_text';
-                break;
+            break;
             case 'author_username': $order_by = 'author_username';
-                break;
+            break;
 
             default: $order_by = $this->order_by;
-                break;
+            break;
         }
 
         return $order_by;
@@ -197,7 +197,7 @@ class PostAPIController extends ThinkUpController {
         // fetch the correct PostDAO and UserDAO from the DAOFactory
         $this->post_dao = DAOFactory::getDAO('PostDAO');
         $this->user_dao = DAOFactory::getDAO('UserDAO');
-        
+
         /*
          * Use the information gathered from the query string to retrieve a
          * User object. This will be the standard object with which to get
@@ -237,67 +237,67 @@ class PostAPIController extends ThinkUpController {
                 }
                 break;
 
-            /**
-             * Gets all retweets to a post.
-             *
-             * Required arguments: post_id
-             *
-             * Optional arguments: network, order_by, unit, count, page, include_entities, include_replies, trim_user
-             */
+                /**
+                 * Gets all retweets to a post.
+                 *
+                 * Required arguments: post_id
+                 *
+                 * Optional arguments: network, order_by, unit, count, page, include_entities, include_replies, trim_user
+                 */
             case 'post_retweets':
                 if (is_null($this->post_id)) {
                     $m = 'A request of type ' . $this->type . ' requires a post_id to be specified.';
                     throw new RequiredArgumentMissingException($m);
                 } else {
                     $data = $this->post_dao->getRetweetsOfPost($this->post_id, $this->network, $this->order_by,
-                            $this->unit, $this->is_public, $this->count, $this->page);
+                    $this->unit, $this->is_public, $this->count, $this->page);
                 }
                 break;
 
-            /**
-             * Gets replies to a post.
-             *
-             * Required arguments: post_id
-             *
-             * Optional arguments: network, order_by, unit, count, page, include_entities, include_replies, trim_user
-             *
-             * Ordering can only be done by either location or follower count.
-             */
+                /**
+                 * Gets replies to a post.
+                 *
+                 * Required arguments: post_id
+                 *
+                 * Optional arguments: network, order_by, unit, count, page, include_entities, include_replies, trim_user
+                 *
+                 * Ordering can only be done by either location or follower count.
+                 */
             case 'post_replies':
                 if (is_null($this->post_id)) {
                     $m = 'A request of type ' . $this->type . ' requires a post_id to be specified.';
                     throw new RequiredArgumentMissingException($m);
                 } else {
                     $data = $this->post_dao->getRepliesToPost($this->post_id, $this->network, $this->order_by,
-                            $this->unit, $this->is_public, $this->count, $this->page);
+                    $this->unit, $this->is_public, $this->count, $this->page);
                 }
                 break;
 
-            /*
-             * Get posts related to a post (replies to it, retweets of it).
-             *
-             * Required arguments: post_id
-             *
-             * Optional arguments: network, count, page, geo_encoded_only, include_original_post, include_entities,
-             * include_replies, trim_user
-             */
+                /*
+                 * Get posts related to a post (replies to it, retweets of it).
+                 *
+                 * Required arguments: post_id
+                 *
+                 * Optional arguments: network, count, page, geo_encoded_only, include_original_post, include_entities,
+                 * include_replies, trim_user
+                 */
             case 'related_posts':
                 if (is_null($this->post_id)) {
                     $m = 'A request of type ' . $this->type . ' requires a post_id to be specified.';
                     throw new RequiredArgumentMissingException($m);
                 } else {
                     $data = $this->post_dao->getRelatedPosts($this->post_id, $this->network, $this->is_public,
-                            $this->count, $this->page, $geo_encoded_only = false, $include_original_post = false);
+                    $this->count, $this->page, $geo_encoded_only = false, $include_original_post = false);
                 }
                 break;
 
-            /*
-             * Gets the user's most replied to posts.
-             *
-             * Required arguments: user_id or username
-             *
-             * Optional arguments: network, count, page, include_entities, include_replies, trim_user
-             */
+                /*
+                 * Gets the user's most replied to posts.
+                 *
+                 * Required arguments: user_id or username
+                 *
+                 * Optional arguments: network, count, page, include_entities, include_replies, trim_user
+                 */
             case 'user_posts_most_replied_to':
                 if (is_null($this->user)) {
                     // Check why the User object is null. Could be missing required fields or not found.
@@ -309,17 +309,17 @@ class PostAPIController extends ThinkUpController {
                     }
                 } else {
                     $data = $this->post_dao->getMostRepliedToPosts($this->user->user_id, $this->network, $this->count,
-                            $this->page, $this->is_public);
+                    $this->page, $this->is_public);
                 }
                 break;
 
-            /*
-             * Gets the user's most retweeted posts.
-             *
-             * Required arguments: user_id or username
-             *
-             * Optional arguments: network, count, page, include_entities, include_replies, trim_user
-             */
+                /*
+                 * Gets the user's most retweeted posts.
+                 *
+                 * Required arguments: user_id or username
+                 *
+                 * Optional arguments: network, count, page, include_entities, include_replies, trim_user
+                 */
             case 'user_posts_most_retweeted':
                 if (is_null($this->user)) {
                     // Check why the User object is null. Could be missing required fields or not found.
@@ -331,18 +331,18 @@ class PostAPIController extends ThinkUpController {
                     }
                 } else {
                     $data = $this->post_dao->getMostRetweetedPosts($this->user->user_id, $this->network, $this->count,
-                            $this->page, $this->is_public);
+                    $this->page, $this->is_public);
                 }
                 break;
 
-            /*
-             * Gets posts a user has made.
-             *
-             * Required arguments: user_id or username
-             *
-             * Optional arguments: network, count, page, order_by, direction, include_entities, include_replies,
-             * trim_user
-             */
+                /*
+                 * Gets posts a user has made.
+                 *
+                 * Required arguments: user_id or username
+                 *
+                 * Optional arguments: network, count, page, order_by, direction, include_entities, include_replies,
+                 * trim_user
+                 */
             case 'user_posts':
                 if (is_null($this->user)) {
                     // Check why the User object is null. Could be missing required fields or not found.
@@ -354,18 +354,18 @@ class PostAPIController extends ThinkUpController {
                     }
                 } else {
                     $data = $this->post_dao->getAllPosts($this->user->user_id, $this->network, $this->count,
-                            $this->page, true, $this->order_by, $this->direction, $this->is_public);
+                    $this->page, true, $this->order_by, $this->direction, $this->is_public);
                 }
                 break;
 
-            /*
-             * Gets posts a user has made.
-             *
-             * Required arguments: user_id or username, from and until
-             *
-             * Optional arguments: network, order_by, direction, include_entities, include_replies,
-             * trim_user
-             */
+                /*
+                 * Gets posts a user has made.
+                 *
+                 * Required arguments: user_id or username, from and until
+                 *
+                 * Optional arguments: network, order_by, direction, include_entities, include_replies,
+                 * trim_user
+                 */
             case 'user_posts_in_range':
                 if (is_null($this->user) || is_null($this->from) || is_null($this->until)) {
                     // Check why the User object is null. Could be missing required fields or not found.
@@ -381,17 +381,17 @@ class PostAPIController extends ThinkUpController {
                     }
                 } else {
                     $data = $this->post_dao->getPostsByUserInRange($this->user->user_id, $this->network, $this->from,
-                            $this->until, $this->order_by, $this->direction, $iterator=false, $this->is_public);
+                    $this->until, $this->order_by, $this->direction, $iterator=false, $this->is_public);
                 }
                 break;
 
-            /*
-             * Gets posts a user is mentioned in.
-             *
-             * Required arguments: user_id or username
-             *
-             * Optional arguments: network, count, page, include_rts, include_entities, include_replies, trim_user
-             */
+                /*
+                 * Gets posts a user is mentioned in.
+                 *
+                 * Required arguments: user_id or username
+                 *
+                 * Optional arguments: network, count, page, include_rts, include_entities, include_replies, trim_user
+                 */
             case 'user_mentions':
                 if (is_null($this->user)) {
                     // Check why the User object is null. Could be missing required fields or not found.
@@ -403,18 +403,18 @@ class PostAPIController extends ThinkUpController {
                     }
                 } else {
                     $data = $this->post_dao->getAllMentions($this->user->username, $this->count, $this->network,
-                            $this->page, $this->is_public, $this->include_rts, $this->order_by, $this->direction);
+                    $this->page, $this->is_public, $this->include_rts, $this->order_by, $this->direction);
                 }
                 break;
 
-            /*
-             * Gets question posts a user has made.
-             *
-             * Required arguments: user_id or username
-             *
-             * Optional arguments: network, count, page, order_by, direction, include_entities, include_replies,
-             * trim_user
-             */
+                /*
+                 * Gets question posts a user has made.
+                 *
+                 * Required arguments: user_id or username
+                 *
+                 * Optional arguments: network, count, page, order_by, direction, include_entities, include_replies,
+                 * trim_user
+                 */
             case 'user_questions':
                 if (is_null($this->user)) {
                     // Check why the User object is null. Could be missing required fields or not found.
@@ -426,18 +426,18 @@ class PostAPIController extends ThinkUpController {
                     }
                 } else {
                     $data = $this->post_dao->getAllQuestionPosts($this->user->user_id, $this->network, $this->count,
-                            $this->page, $this->order_by, $this->direction, $this->is_public);
+                    $this->page, $this->order_by, $this->direction, $this->is_public);
                 }
                 break;
 
-            /*
-             * Gets replies to a user.
-             *
-             * Required arguments: user_id or username
-             *
-             * Optional arguments: network, count, page, order_by, direction, include_entities, include_replies,
-             * trim_user
-             */
+                /*
+                 * Gets replies to a user.
+                 *
+                 * Required arguments: user_id or username
+                 *
+                 * Optional arguments: network, count, page, order_by, direction, include_entities, include_replies,
+                 * trim_user
+                 */
             case 'user_replies':
                 if (is_null($this->user)) {
                     // Check why the User object is null. Could be missing required fields or not found.
@@ -449,14 +449,14 @@ class PostAPIController extends ThinkUpController {
                     }
                 } else {
                     $data = $this->post_dao->getAllReplies($this->user->user_id, $this->network, $this->count,
-                            $this->page, $this->order_by, $this->direction, $this->is_public);
+                    $this->page, $this->order_by, $this->direction, $this->is_public);
                 }
                 break;
 
 
-            /*
-             * Generate an error because the API call type was not recognized.
-             */
+                /*
+                 * Generate an error because the API call type was not recognized.
+                 */
             default:
                 throw new APICallTypeNotRecognizedException($this->type);
                 break;
@@ -516,7 +516,7 @@ class PostAPIController extends ThinkUpController {
              * the method returns all replies.
              */
             $replies = $this->post_dao->getRepliesToPost($post->post_id, $post->network,
-                            $this->order_by, $this->unit, $this->is_public, 0);
+            $this->order_by, $this->unit, $this->is_public, 0);
 
             // if replies exist for this post
             if ($replies) {
@@ -563,8 +563,7 @@ class PostAPIController extends ThinkUpController {
         $user = $this->user_dao->getUserByName($post->author_username, $post->network);
 
         /*
-         * Occasionally you run into users you haven't fetched yet. Bypass this code
-         * if you find one of them. 
+         * Occasionally you run into users you haven't fetched yet. Bypass this code if you find one of them.
          */
         if ($user != null) {
             if (!$this->trim_user) {
@@ -577,16 +576,16 @@ class PostAPIController extends ThinkUpController {
                 $post->user->screen_name = $post->user->username;
                 $post->user->statuses_count = $post->user->post_count;
                 $post->user->created_at = strftime('%a %b %d %T %z %Y', strtotime($post->user->joined));
-                $post->user->favourites_count = $post->user->favorites_count;
+                $post->user->favorites_count = $post->user->favorites_count;
                 $post->user->utc_offset = Config::getInstance()->getGMTOffset() * 3600;
 
                 if (isset($post->user->other->avg_tweets_per_day)) {
                     $post->user->avg_tweets_per_day = $post->user->other->avg_tweets_per_day;
                 }
 
-                if (isset($post->user->other->last_updated)) {
-                    $post->user->last_updated = $post->user->other->last_updated;
-                }
+                //                if (isset($post->user->other)) {
+                //                    $post->user->last_updated = $post->user->other->last_updated;
+                //                }
 
                 $post->user->thinkup = new stdClass();
 
@@ -599,7 +598,6 @@ class PostAPIController extends ThinkUpController {
             }
         }
 
-
         if ($this->include_entities) {
             /*
              * Gather the links and format them into a Tweet entity.
@@ -611,7 +609,7 @@ class PostAPIController extends ThinkUpController {
             $post->entities->urls = array();
             if (!is_null($post->link)) {
                 if (!is_null($post->link->url) && !empty($post->link->url)
-                        && stripos($post->link->url, $post->text) !== false) {
+                && stripos($post->link->url, $post->text) !== false) {
                     $link = new stdClass();
                     $link->url = stripslashes($post->link->url);
                     $link->expanded_url = $post->link->expanded_url == "" ? null : $post->link->expanded_url;
@@ -648,7 +646,7 @@ class PostAPIController extends ThinkUpController {
             if (!empty($mentions)) {
                 foreach ($mentions as $username) {
                     $mentioned_user = $this->user_dao->getUserByName(str_replace('@', '', $username),
-                                    $user->network);
+                    $user->network);
                     $mention = new stdClass();
 
                     if (is_null($mentioned_user)) {
@@ -659,7 +657,7 @@ class PostAPIController extends ThinkUpController {
                          * If the user is not in our own ThinkUp database, a Twitter API call needs to be
                          * made to fill in the missing details.
                          *
-                         * Not 100% sure if this is a good idea but it works. 
+                         * Not 100% sure if this is a good idea but it works.
                          */
                         $user_api_call = json_decode(Utils::getURLContents(
                                                 'https://api.twitter.com/1/users/show.json?screen_name=' . $username));
@@ -694,48 +692,48 @@ class PostAPIController extends ThinkUpController {
          * Twtter like locations / naming conventions.
          */
         unset(
-                $post->post_id,
-                $post->pub_date,
-                $post->network,
-                $post->post_text,
-                $post->author,
-                $post->author_fullname,
-                $post->author_username,
-                $post->author_user_id,
-                $post->author_avatar,
-                $post->adj_pub_date,
-                $post->user->follower_count,
-                $post->user->is_protected,
-                $post->user->network,
-                $post->user->avatar,
-                $post->user->full_name,
-                $post->user->username,
-                $post->user->user_id,
-                $post->user->post_count,
-                $post->user->joined,
-                $post->user->favorites_count,
-                $post->user->other,
-                $post->link,
-                $post->in_retweet_of_post_id,
-                $post->in_retweet_of_user_id,
-                $post->retweet_count_cache,
-                $post->reply_count_cache,
-                $post->old_retweet_count_cache,
-                $post->is_geo_encoded,
-                $post->rt_threshold,
-                $post->is_protected,
-                $post->user->last_post,
-                $post->user->last_post_id,
-                $post->user->found_in
+        $post->post_id,
+        $post->pub_date,
+        $post->network,
+        $post->post_text,
+        $post->author,
+        $post->author_fullname,
+        $post->author_username,
+        $post->author_user_id,
+        $post->author_avatar,
+        $post->adj_pub_date,
+        $post->user->follower_count,
+        $post->user->is_protected,
+        $post->user->network,
+        $post->user->avatar,
+        $post->user->full_name,
+        $post->user->username,
+        $post->user->user_id,
+        $post->user->post_count,
+        $post->user->joined,
+        $post->user->favorites_count,
+        $post->user->other,
+        $post->link,
+        $post->in_retweet_of_post_id,
+        $post->in_retweet_of_user_id,
+        $post->retweet_count_cache,
+        $post->reply_count_cache,
+        $post->old_retweet_count_cache,
+        $post->is_geo_encoded,
+        $post->rt_threshold,
+        $post->is_protected,
+        $post->user->last_post,
+        $post->user->last_post_id,
+        $post->user->found_in
         );
 
         return $post;
     }
-    
+
     /**
      * Converts a User object into a stdClass object. This was necessary
      * because of the overloaded __set() method on the User object.
-     * 
+     *
      * @param User $user A User object.
      * @return stdClass A stdClass object with all of the same vars as the
      * User object that was passed in.

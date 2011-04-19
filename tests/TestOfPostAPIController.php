@@ -35,16 +35,10 @@ require_once THINKUP_ROOT_PATH . 'webapp/config.inc.php';
  */
 class TestOfPostAPIController extends ThinkUpUnitTestCase {
 
-    public function __construct() {
-        $this->UnitTestCase(
-                'PostAPIController class test');
-    }
-
     public function setUp() {
         parent::setUp();
         $config = Config::getInstance();
-        $this->prefix = $config->getValue(
-                        'table_prefix');
+        $this->prefix = $config->getValue( 'table_prefix');
         $this->builders = self::buildData();
     }
 
@@ -55,15 +49,11 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
 
     protected static function buildData() {
         $builders = array();
-        $builders[] = FixtureBuilder::build(
-                        'owner_instances',
-                        array(
+        $builders[] = FixtureBuilder::build('owner_instances', array(
                             'owner_id' => 1,
                             'instance_id' => 1));
 
-        $builders[] = FixtureBuilder::build(
-                        'users',
-                        array(
+        $builders[] = FixtureBuilder::build( 'users', array(
                             'user_id' => 13,
                             'user_name' => 'ev',
                             'full_name' => 'Ev Williams',
@@ -73,9 +63,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'last_updated' => '1/1/2005',
                             'network' => 'twitter'));
 
-        $builders[] = FixtureBuilder::build(
-                        'users',
-                        array(
+        $builders[] = FixtureBuilder::build( 'users', array(
                             'user_id' => 18,
                             'user_name' => 'shutterbug',
                             'full_name' => 'Shutter Bug',
@@ -84,9 +72,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'follower_count' => 10,
                             'network' => 'twitter'));
 
-        $builders[] = FixtureBuilder::build(
-                        'users',
-                        array(
+        $builders[] = FixtureBuilder::build( 'users', array(
                             'user_id' => 19,
                             'user_name' => 'linkbaiter',
                             'full_name' => 'Link Baiter',
@@ -95,9 +81,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'follower_count' => 70,
                             'network' => 'twitter'));
 
-        $builders[] = FixtureBuilder::build(
-                        'users',
-                        array(
+        $builders[] = FixtureBuilder::build( 'users', array(
                             'user_id' => 20,
                             'user_name' => 'user1',
                             'full_name' => 'User 1',
@@ -107,9 +91,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'network' => 'twitter'));
 
         //protected user
-        $builders[] = FixtureBuilder::build(
-                        'users',
-                        array(
+        $builders[] = FixtureBuilder::build( 'users', array(
                             'user_id' => 21,
                             'user_name' => 'user2',
                             'full_name' => 'User 2',
@@ -118,9 +100,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'follower_count' => 80,
                             'network' => 'twitter'));
 
-        $builders[] = FixtureBuilder::build(
-                        'users',
-                        array(
+        $builders[] = FixtureBuilder::build( 'users', array(
                             'user_id' => 22,
                             'user_name' => 'quoter',
                             'full_name' => 'Quotables',
@@ -128,9 +108,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'follower_count' => 80,
                             'network' => 'twitter'));
 
-        $builders[] = FixtureBuilder::build(
-                        'users',
-                        array(
+        $builders[] = FixtureBuilder::build( 'users', array(
                             'user_id' => 23,
                             'user_name' => 'user3',
                             'full_name' => 'User 3',
@@ -138,9 +116,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'follower_count' => 100,
                             'network' => 'twitter'));
 
-        $builders[] = FixtureBuilder::build(
-                        'users',
-                        array(
+        $builders[] = FixtureBuilder::build( 'users', array(
                             'user_id' => 24,
                             'user_name' => 'notonpublictimeline',
                             'full_name' => 'Not on Public Timeline',
@@ -149,41 +125,31 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'follower_count' => 100));
 
         //Make public
-        $builders[] = FixtureBuilder::build(
-                        'instances',
-                        array(
+        $builders[] = FixtureBuilder::build( 'instances', array(
                             'network_user_id' => 13,
                             'network_username' => 'ev',
                             'is_public' => 1,
                             'network' => 'twitter'));
 
-        $builders[] = FixtureBuilder::build(
-                        'instances',
-                        array(
+        $builders[] = FixtureBuilder::build( 'instances', array(
                             'network_user_id' => 18,
                             'network_username' => 'shutterbug',
                             'is_public' => 1,
                             'network' => 'twitter'));
 
-        $builders[] = FixtureBuilder::build(
-                        'instances',
-                        array(
+        $builders[] = FixtureBuilder::build( 'instances', array(
                             'network_user_id' => 19,
                             'network_username' => 'linkbaiter',
                             'is_public' => 1,
                             'network' => 'twitter'));
 
-        $builders[] = FixtureBuilder::build(
-                        'instances',
-                        array(
+        $builders[] = FixtureBuilder::build( 'instances', array(
                             'network_user_id' => 23,
                             'network_username' => 'user3',
                             'is_public' => 1,
                             'network' => 'twitter'));
 
-        $builders[] = FixtureBuilder::build(
-                        'instances',
-                        array(
+        $builders[] = FixtureBuilder::build( 'instances', array(
                             'network_user_id' => 24,
                             'network_username' => 'notonpublictimeline',
                             'is_public' => 0,
@@ -200,9 +166,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
             } else {
                 $source = 'web';
             }
-            $builders[] = FixtureBuilder::build(
-                            'posts',
-                            array(
+            $builders[] = FixtureBuilder::build( 'posts', array(
                                 'post_id' => $counter,
                                 'author_user_id' => 13,
                                 'author_username' => 'ev',
@@ -229,10 +193,8 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
             $pseudo_minute = str_pad($counter, 2, "0", STR_PAD_LEFT);
             $source = rand(0,1) == 0 ? 'Flickr' : 'Picasa';
             $protected = (($counter % 2) == 1);
-            
-            $builders[] = FixtureBuilder::build(
-                            'posts',
-                            array(
+
+            $builders[] = FixtureBuilder::build( 'posts', array(
                                 'post_id' => $post_id,
                                 'network' => 'twitter',
                                 'author_user_id' => 18,
@@ -250,9 +212,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                                 'is_geo_encoded' => 0,
                                 'is_protected' => $protected));
 
-            $builders[] = FixtureBuilder::build(
-                            'links',
-                            array(
+            $builders[] = FixtureBuilder::build( 'links', array(
                                 'url' => 'http://example.com/' . $counter,
                                 'expanded_url' => 'http://example.com/' . $counter . '.jpg',
                                 'title' => '',
@@ -269,9 +229,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
             $post_id = $counter + 80;
             $pseudo_minute = str_pad(($counter), 2, "0", STR_PAD_LEFT);
             $builders[] = FixtureBuilder::build(
-                            'posts',
-                            array(
-                                'post_id' => $post_id,
+                            'posts', array( 'post_id' => $post_id,
                                 'author_user_id' => 19,
                                 'author_username' => 'linkbaiter',
                                 'author_fullname' => 'Link Baiter',
@@ -285,9 +243,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                                 'retweet_count_cache' => 0,
                                 'network' => 'twitter'));
 
-            $builders[] = FixtureBuilder::build(
-                            'links',
-                            array(
+            $builders[] = FixtureBuilder::build( 'links', array(
                                 'url' => 'http://example.com/' . $counter,
                                 'explanded_url' => 'http://example.com/' . $counter . '.html',
                                 'title' => 'Link $counter',
@@ -304,9 +260,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
             $post_id = $counter + 120;
             $pseudo_minute = str_pad(($counter), 2, "0", STR_PAD_LEFT);
             if (($counter / 2) == 0) {
-                $builders[] = FixtureBuilder::build(
-                                'posts',
-                                array(
+                $builders[] = FixtureBuilder::build( 'posts', array(
                                     'post_id' => $post_id,
                                     'author_user_id' => 20,
                                     'author_username' => 'user1',
@@ -321,9 +275,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                                     'pub_date' => '2006-03-01 00:' . $pseudo_minute . ':00',
                                     'location' => 'New Delhi'));
             } else {
-                $builders[] = FixtureBuilder::build(
-                                'posts',
-                                array(
+                $builders[] = FixtureBuilder::build( 'posts', array(
                                     'post_id' => $post_id,
                                     'author_user_id' => 21,
                                     'author_username' => 'user2',
@@ -342,9 +294,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
         }
 
         //Add replies to specific post
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 131,
                             'author_user_id' => 20,
                             'author_username' => 'user1',
@@ -365,9 +315,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'is_geo_encoded' => 1,
                             'is_protected' => 0));
 
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 132,
                             'author_user_id' => 21,
                             'author_username' => 'user2',
@@ -388,9 +336,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'is_geo_encoded' => 1,
                             'is_protected' => 1));
 
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 133,
                             'author_user_id' => 19,
                             'author_username' => 'linkbaiter',
@@ -411,9 +357,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'is_geo_encoded' => 1,
                             'is_protected' => 0));
 
-        $builders[] = FixtureBuilder::build(
-                        'links',
-                        array(
+        $builders[] = FixtureBuilder::build( 'links', array(
                             'url' => 'http://example.com',
                             'expanded_url' => 'http://example.com/expanded-link.html',
                             'title' => 'Link 1',
@@ -423,9 +367,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
 
         //Add retweets of a specific post
         //original post
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 134,
                             'author_user_id' => 22,
                             'author_username' => 'quoter',
@@ -445,9 +387,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'is_protected' => 0));
 
         // original post 2
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 148,
                             'author_user_id' => 22,
                             'author_username' => 'quoter',
@@ -466,9 +406,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'is_geo_encoded' => 1,
                             'is_protected' => 0));
         //retweet 1
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 135,
                             'author_user_id' => 20,
                             'author_username' => 'user1',
@@ -489,9 +427,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'in_reply_to_post_id' => null,
                             'is_protected' => 0));
         //retweet 2
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 136,
                             'author_user_id' => 21,
                             'author_username' => 'user2',
@@ -511,9 +447,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'is_geo_encoded' => 1,
                             'is_protected' => 0));
         //retweet 3
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 137,
                             'author_user_id' => 19,
                             'author_username' => 'linkbaiter',
@@ -534,9 +468,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'is_protected' => 0));
 
         //retweet 4
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 149,
                             'author_user_id' => 19,
                             'author_username' => 'linkbaiter',
@@ -557,9 +489,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'is_protected' => 0));
 
         //Add reply back
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 138,
                             'author_user_id' => 18,
                             'author_username' => 'shutterbug',
@@ -576,9 +506,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'in_reply_to_post_id' => 132));
 
         //Add user exchange
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 139,
                             'author_user_id' => 20,
                             'author_username' => 'user1',
@@ -595,9 +523,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'in_reply_to_user_id' => 13,
                             'is_protected' => 1));
 
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 140,
                             'author_user_id' => 13,
                             'author_username' => 'ev',
@@ -614,9 +540,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'in_reply_to_post_id' => 139));
 
         //Add posts replying to post not in the system
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 141,
                             'author_user_id' => 23,
                             'author_username' => 'user3',
@@ -632,9 +556,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'in_reply_to_user_id' => 20,
                             'in_reply_to_post_id' => 250));
 
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 142,
                             'author_user_id' => 23,
                             'author_username' => 'user3',
@@ -651,9 +573,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'in_reply_to_post_id' => 251));
 
         //Add post by instance not on public timeline
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 143,
                             'author_user_id' => 24,
                             'author_username' => 'notonpublictimeline',
@@ -666,9 +586,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'pub_date' => '2006-03-01 00:00:00'));
 
         //Add replies to specific post
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 144,
                             'author_user_id' => 20,
                             'author_username' => 'user1',
@@ -689,9 +607,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'geo' => '28.635308, 77.22496',
                             'is_geo_encoded' => 1));
 
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 145,
                             'author_user_id' => 20,
                             'author_username' => 'user1',
@@ -713,9 +629,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'is_geo_encoded' => 1));
 
         // add another post to user 22 to have a reply to
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 146,
                             'author_user_id' => 22,
                             'author_username' => 'quoter',
@@ -735,9 +649,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'is_protected' => 0));
 
 
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 147,
                             'author_user_id' => 20,
                             'author_username' => 'user1',
@@ -758,9 +670,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'geo' => '28.635308, 77.22496',
                             'is_geo_encoded' => 1));
 
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 150,
                             'author_user_id' => 20,
                             'author_username' => 'user1',
@@ -777,9 +687,7 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
                             'in_reply_to_user_id' => 13,
                             'is_protected' => 0));
 
-        $builders[] = FixtureBuilder::build(
-                        'posts',
-                        array(
+        $builders[] = FixtureBuilder::build( 'posts', array(
                             'post_id' => 151,
                             'author_user_id' => 20,
                             'author_username' => 'user1',
@@ -813,11 +721,11 @@ class TestOfPostAPIController extends ThinkUpUnitTestCase {
         $this->assertEqual($output->id, 137, "Incorrect post fetched.");
 
         $this->assertEqual(sizeof($output->coordinates->coordinates), 2,
-                "Size of coordinates is too big or two small. Is " . sizeof($output->coordinates->coordinates) . "
-when it should be 2.");
+        "Size of coordinates is too big or two small. Is " . sizeof($output->coordinates->coordinates) . 
+        " when it should be 2.");
 
         $this->assertEqual($output->thinkup->is_geo_encoded, 1);
-        $this->assertEqual($output->coordinates, $output->geo, 
+        $this->assertEqual($output->coordinates, $output->geo,
                 "Geo and coordinates are meant to be exactly the same.");
 
         // test trim user
@@ -847,7 +755,7 @@ when it should be 2.");
         $_GET['post_id'] = 134;
         $controller = new PostAPIController(true);
         $output = json_decode($controller->go());
-        
+
         // test the object type is correct
         $this->assertTrue(is_array($output));
         foreach($output as $post) {
@@ -866,8 +774,8 @@ when it should be 2.");
 
         $distance = $output[0]->reply_retweet_distance;
         foreach ($output as $post) {
-            $this->assertTrue($post->reply_retweet_distance >= $distance, "Retweets not correctly ordered by distance.
- " . $post->reply_retweet_distance . " is not greater than " . $distance);
+            $this->assertTrue($post->reply_retweet_distance >= $distance, "Retweets not correctly ordered by ".
+            "distance. " . $post->reply_retweet_distance . " is not greater than " . $distance);
             $distance = $post->reply_retweet_distance;
         }
 
@@ -892,7 +800,7 @@ when it should be 2.");
 
         foreach ($output_km as $key=>$post) {
             $this->assertEqual($output_mi[$key]->reply_retweet_distance,
-                    round($output_km[$key]->reply_retweet_distance/1.609));
+            round($output_km[$key]->reply_retweet_distance/1.609));
         }
 
         // test count
@@ -1021,7 +929,7 @@ when it should be 2.");
 
         foreach ($output_km as $key=>$post) {
             $this->assertEqual($output_mi[$key]->reply_retweet_distance,
-                    round($output_km[$key]->reply_retweet_distance/1.609));
+            round($output_km[$key]->reply_retweet_distance/1.609));
         }
 
         // test trim user
@@ -1094,7 +1002,6 @@ when it should be 2.");
         $controller = new PostAPIController(true);
         $output = json_decode($controller->go());
         $this->assertEqual(sizeof($output), 3);
-
 
         // test paging
         $_GET['count'] = 1;
@@ -1588,6 +1495,7 @@ when it should be 2.");
         $output = json_decode($controller->go());
         $count = $output[0]->user->followers_count;
         foreach ($output as $post) {
+            $this->debug("Count ".$post->user->followers_count);
             $this->assertTrue($post->user->followers_count <= $count);
             $count = $post->user->followers_count;
         }
@@ -1658,7 +1566,7 @@ when it should be 2.");
         $controller = new PostAPIController(true);
         $output = json_decode($controller->go());
         $this->assertEqual(sizeof($output), 2);
-        
+
         $this->assertEqual(sizeof($output[0]->user), 1);
 
         // test sql injection
@@ -1785,6 +1693,7 @@ when it should be 2.");
         $output = json_decode($controller->go());
         $count = $output[0]->user->followers_count;
         foreach ($output as $post) {
+            $this->debug("Count ".$post->user->followers_count);
             $this->assertTrue($post->user->followers_count <= $count);
             $count = $post->user->followers_count;
         }
@@ -1867,7 +1776,7 @@ when it should be 2.");
             $this->assertEqual(preg_match('/\?/', $post->text), 1);
         }
 
-         // test count
+        // test count
         $_GET['count'] = 1;
         $controller = new PostAPIController(true);
         $output = json_decode($controller->go());

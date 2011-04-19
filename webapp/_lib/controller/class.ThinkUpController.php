@@ -184,8 +184,8 @@ abstract class ThinkUpController {
         if (isset($this->view_template)) {
             if ($this->view_mgr->isViewCached()) {
                 $cache_key = $this->getCacheKeyString();
-                if ($this->profiler_enabled && !isset($this->json_data) && strpos($this->content_type,
-                'text/javascript') === false) {
+                if ($this->profiler_enabled && !isset($this->json_data) &&
+                strpos($this->content_type, 'text/javascript') === false) {
                     $view_start_time = microtime(true);
                     $cache_source = $this->shouldRefreshCache()?"DATABASE":"FILE";
                     $results = $this->view_mgr->fetch($this->view_template, $cache_key);
@@ -199,8 +199,8 @@ abstract class ThinkUpController {
                     return $this->view_mgr->fetch($this->view_template, $cache_key);
                 }
             } else {
-                if ($this->profiler_enabled && !isset($this->json_data) && strpos($this->content_type,
-                'text/javascript') === false) {
+                if ($this->profiler_enabled && !isset($this->json_data) &&
+                strpos($this->content_type, 'text/javascript') === false) {
                     $view_start_time = microtime(true);
                     $results = $this->view_mgr->fetch($this->view_template);
                     $view_end_time = microtime(true);
@@ -213,6 +213,7 @@ abstract class ThinkUpController {
                 }
             }
         } else if(isset($this->json_data) ) {
+            $this->setContentType('application/json');
             if ($this->view_mgr->isViewCached()) {
                 if ($this->view_mgr->is_cached('json.tpl', $this->getCacheKeyString())) {
                     return $this->view_mgr->fetch('json.tpl', $this->getCacheKeyString());
@@ -273,7 +274,7 @@ abstract class ThinkUpController {
         if ($data != null) {
             $this->setContentType('application/json');
         }
-        
+
         $this->json_data = $data;
     }
 
